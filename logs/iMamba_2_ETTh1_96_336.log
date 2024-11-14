@@ -1,0 +1,68 @@
+Args in experiment:
+Namespace(is_training=1, model_id='ETTh1_96_336', model='iMamba_2', data='ETTh1', root_path='./dataset/ETT-small/', data_path='ETTh1.csv', features='M', target='OT', freq='h', checkpoints='./checkpoints/', seq_len=96, label_len=48, pred_len=336, enc_in=7, dec_in=7, c_out=7, d_model=256, n_heads=8, e_layers=2, d_layers=1, d_ff=256, moving_avg=25, factor=1, distil=True, dropout=0.1, embed='timeF', activation='gelu', output_attention=False, do_predict=False, num_workers=10, itr=1, train_epochs=10, batch_size=32, patience=3, learning_rate=5e-05, des='Exp', loss='MSE', lradj='type1', use_amp=False, use_gpu=True, gpu=0, use_multi_gpu=False, devices='0,1,2,3', exp_name='MTSF', channel_independence=False, inverse=False, class_strategy='projection', target_root_path='./data/electricity/', target_data_path='electricity.csv', efficient_training=False, use_norm=True, partial_start_index=0, d_state=2)
+Use GPU: cuda:0
+>>>>>>>start training : ETTh1_96_336_iMamba_2_ETTh1_M_ft96_sl48_ll336_pl256_dm8_nh2_el1_dl256_df1_fctimeF_ebTrue_dtExp_projection_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+train 8209
+val 2545
+test 2545
+	iters: 100, epoch: 1 | loss: 0.4544872
+	speed: 0.0333s/iter; left time: 81.9599s
+	iters: 200, epoch: 1 | loss: 0.5283609
+	speed: 0.0198s/iter; left time: 46.7131s
+Epoch: 1 cost time: 6.46205472946167
+Epoch: 1, Steps: 256 | Train Loss: 0.5715605 Vali Loss: 1.3250033 Test Loss: 0.5027171
+Validation loss decreased (inf --> 1.325003).  Saving model ...
+Updating learning rate to 5e-05
+	iters: 100, epoch: 2 | loss: 0.5266724
+	speed: 0.1781s/iter; left time: 392.6080s
+	iters: 200, epoch: 2 | loss: 0.4869086
+	speed: 0.0261s/iter; left time: 55.0338s
+Epoch: 2 cost time: 8.126168012619019
+Epoch: 2, Steps: 256 | Train Loss: 0.5037952 Vali Loss: 1.2962517 Test Loss: 0.4838478
+Validation loss decreased (1.325003 --> 1.296252).  Saving model ...
+Updating learning rate to 2.5e-05
+	iters: 100, epoch: 3 | loss: 0.4957263
+	speed: 0.1213s/iter; left time: 236.4833s
+	iters: 200, epoch: 3 | loss: 0.4976495
+	speed: 0.0151s/iter; left time: 27.9805s
+Epoch: 3 cost time: 4.177653551101685
+Epoch: 3, Steps: 256 | Train Loss: 0.4872679 Vali Loss: 1.2960798 Test Loss: 0.4826564
+Validation loss decreased (1.296252 --> 1.296080).  Saving model ...
+Updating learning rate to 1.25e-05
+	iters: 100, epoch: 4 | loss: 0.4788902
+	speed: 0.1225s/iter; left time: 207.3437s
+	iters: 200, epoch: 4 | loss: 0.5635847
+	speed: 0.0154s/iter; left time: 24.5969s
+Epoch: 4 cost time: 4.075031042098999
+Epoch: 4, Steps: 256 | Train Loss: 0.4799912 Vali Loss: 1.2918918 Test Loss: 0.4781054
+Validation loss decreased (1.296080 --> 1.291892).  Saving model ...
+Updating learning rate to 6.25e-06
+	iters: 100, epoch: 5 | loss: 0.4850788
+	speed: 0.1372s/iter; left time: 197.2177s
+	iters: 200, epoch: 5 | loss: 0.4368648
+	speed: 0.0167s/iter; left time: 22.3647s
+Epoch: 5 cost time: 4.5959632396698
+Epoch: 5, Steps: 256 | Train Loss: 0.4761694 Vali Loss: 1.2936996 Test Loss: 0.4779518
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 3.125e-06
+	iters: 100, epoch: 6 | loss: 0.5501429
+	speed: 0.1296s/iter; left time: 153.0099s
+	iters: 200, epoch: 6 | loss: 0.4440452
+	speed: 0.0133s/iter; left time: 14.3615s
+Epoch: 6 cost time: 3.6074647903442383
+Epoch: 6, Steps: 256 | Train Loss: 0.4739222 Vali Loss: 1.2931844 Test Loss: 0.4776193
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 1.5625e-06
+	iters: 100, epoch: 7 | loss: 0.4998025
+	speed: 0.1368s/iter; left time: 126.5256s
+	iters: 200, epoch: 7 | loss: 0.4691076
+	speed: 0.0141s/iter; left time: 11.6082s
+Epoch: 7 cost time: 4.118476152420044
+Epoch: 7, Steps: 256 | Train Loss: 0.4732774 Vali Loss: 1.2960427 Test Loss: 0.4773785
+EarlyStopping counter: 3 out of 3
+Early stopping
+>>>>>>>testing : ETTh1_96_336_iMamba_2_ETTh1_M_ft96_sl48_ll336_pl256_dm8_nh2_el1_dl256_df1_fctimeF_ebTrue_dtExp_projection_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+test 2545
+test shape: (2545, 1, 336, 7) (2545, 1, 336, 7)
+test shape: (2545, 336, 7) (2545, 336, 7)
+mse:0.47810545563697815, mae:0.45676112174987793

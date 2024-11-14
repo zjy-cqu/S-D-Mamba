@@ -1,0 +1,72 @@
+Args in experiment:
+Namespace(is_training=1, model_id='Exchange_96_720', model='S_Mamba', data='custom', root_path='./dataset/exchange_rate/', data_path='exchange_rate.csv', features='M', target='OT', freq='h', checkpoints='./checkpoints/', seq_len=96, label_len=48, pred_len=720, enc_in=8, dec_in=8, c_out=8, d_model=128, n_heads=8, e_layers=2, d_layers=1, d_ff=128, moving_avg=25, factor=1, distil=True, dropout=0.1, embed='timeF', activation='gelu', output_attention=False, do_predict=False, num_workers=10, itr=1, train_epochs=10, batch_size=32, patience=3, learning_rate=5e-05, des='Exp', loss='MSE', lradj='type1', use_amp=False, use_gpu=True, gpu=0, use_multi_gpu=False, devices='0,1,2,3', exp_name='MTSF', channel_independence=False, inverse=False, class_strategy='projection', target_root_path='./data/electricity/', target_data_path='electricity.csv', efficient_training=False, use_norm=True, partial_start_index=0, d_state=32)
+Use GPU: cuda:0
+>>>>>>>start training : Exchange_96_720_S_Mamba_custom_M_ft96_sl48_ll720_pl128_dm8_nh2_el1_dl128_df1_fctimeF_ebTrue_dtExp_projection_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+train 4496
+val 41
+test 798
+	iters: 100, epoch: 1 | loss: 0.7744434
+	speed: 0.0281s/iter; left time: 36.5948s
+Epoch: 1 cost time: 3.821787118911743
+Epoch: 1, Steps: 140 | Train Loss: 0.8722756 Vali Loss: 1.3541745 Test Loss: 0.8839130
+Validation loss decreased (inf --> 1.354174).  Saving model ...
+Updating learning rate to 5e-05
+	iters: 100, epoch: 2 | loss: 0.8778178
+	speed: 0.0781s/iter; left time: 90.7106s
+Epoch: 2 cost time: 3.602360725402832
+Epoch: 2, Steps: 140 | Train Loss: 0.8461390 Vali Loss: 1.2977093 Test Loss: 0.8642918
+Validation loss decreased (1.354174 --> 1.297709).  Saving model ...
+Updating learning rate to 2.5e-05
+	iters: 100, epoch: 3 | loss: 0.9034407
+	speed: 0.0721s/iter; left time: 73.6351s
+Epoch: 3 cost time: 3.5997681617736816
+Epoch: 3, Steps: 140 | Train Loss: 0.8344311 Vali Loss: 1.1942219 Test Loss: 0.8597407
+Validation loss decreased (1.297709 --> 1.194222).  Saving model ...
+Updating learning rate to 1.25e-05
+	iters: 100, epoch: 4 | loss: 0.7664218
+	speed: 0.0802s/iter; left time: 70.6176s
+Epoch: 4 cost time: 3.171225070953369
+Epoch: 4, Steps: 140 | Train Loss: 0.8301459 Vali Loss: 1.1705512 Test Loss: 0.8590322
+Validation loss decreased (1.194222 --> 1.170551).  Saving model ...
+Updating learning rate to 6.25e-06
+	iters: 100, epoch: 5 | loss: 0.7655514
+	speed: 0.0754s/iter; left time: 55.8995s
+Epoch: 5 cost time: 3.5337460041046143
+Epoch: 5, Steps: 140 | Train Loss: 0.8279827 Vali Loss: 1.1635286 Test Loss: 0.8585936
+Validation loss decreased (1.170551 --> 1.163529).  Saving model ...
+Updating learning rate to 3.125e-06
+	iters: 100, epoch: 6 | loss: 0.7123943
+	speed: 0.0813s/iter; left time: 48.8870s
+Epoch: 6 cost time: 3.451868772506714
+Epoch: 6, Steps: 140 | Train Loss: 0.8271242 Vali Loss: 1.1364486 Test Loss: 0.8584533
+Validation loss decreased (1.163529 --> 1.136449).  Saving model ...
+Updating learning rate to 1.5625e-06
+	iters: 100, epoch: 7 | loss: 0.8123231
+	speed: 0.0735s/iter; left time: 33.9026s
+Epoch: 7 cost time: 3.0389199256896973
+Epoch: 7, Steps: 140 | Train Loss: 0.8270639 Vali Loss: 1.1816764 Test Loss: 0.8582873
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 7.8125e-07
+	iters: 100, epoch: 8 | loss: 0.8556775
+	speed: 0.0765s/iter; left time: 24.5554s
+Epoch: 8 cost time: 3.665137529373169
+Epoch: 8, Steps: 140 | Train Loss: 0.8269773 Vali Loss: 1.1621302 Test Loss: 0.8581373
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 3.90625e-07
+	iters: 100, epoch: 9 | loss: 0.7962411
+	speed: 0.0783s/iter; left time: 14.1739s
+Epoch: 9 cost time: 3.5540430545806885
+Epoch: 9, Steps: 140 | Train Loss: 0.8263646 Vali Loss: 1.1230564 Test Loss: 0.8580859
+Validation loss decreased (1.136449 --> 1.123056).  Saving model ...
+Updating learning rate to 1.953125e-07
+	iters: 100, epoch: 10 | loss: 0.8810523
+	speed: 0.0828s/iter; left time: 3.3928s
+Epoch: 10 cost time: 3.694481134414673
+Epoch: 10, Steps: 140 | Train Loss: 0.8264103 Vali Loss: 1.1444521 Test Loss: 0.8580755
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 9.765625e-08
+>>>>>>>testing : Exchange_96_720_S_Mamba_custom_M_ft96_sl48_ll720_pl128_dm8_nh2_el1_dl128_df1_fctimeF_ebTrue_dtExp_projection_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+test 798
+test shape: (798, 1, 720, 8) (798, 1, 720, 8)
+test shape: (798, 720, 8) (798, 720, 8)
+mse:0.8580860495567322, mae:0.6993972659111023

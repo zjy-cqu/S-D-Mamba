@@ -1,4 +1,9 @@
-export CUDA_VISIBLE_DEVICES=0
+export CUDA_VISIBLE_DEVICES=2
+
+if [ ! -d "./logs" ]; then
+    mkdir ./logs
+fi
+
 
 model_name=S_Mamba
 python -u run.py \
@@ -22,7 +27,8 @@ python -u run.py \
   --train_epochs 5 \
   --batch_size 16 \
   --learning_rate 0.001 \
-  --itr 1
+  --itr 1 >logs/$model_name'_'electricity_96_96.log 
+
 python -u run.py \
   --is_training 1 \
   --root_path ./dataset/electricity/ \
@@ -43,7 +49,8 @@ python -u run.py \
   --batch_size 16 \
   --train_epochs 5 \
   --learning_rate 0.0005 \
-  --itr 1
+  --itr 1 >logs/$model_name'_'electricity_96_192.log 
+
   python -u run.py \
   --is_training 1 \
   --root_path ./dataset/electricity/ \
@@ -64,7 +71,8 @@ python -u run.py \
   --batch_size 16 \
   --train_epochs 5 \
   --learning_rate 0.0005 \
-  --itr 1
+  --itr 1 >logs/$model_name'_'electricity_96_336.log 
+
   python -u run.py \
   --is_training 1 \
   --root_path ./dataset/electricity/ \
@@ -85,4 +93,4 @@ python -u run.py \
   --train_epochs 5 \
   --batch_size 16 \
   --learning_rate 0.0005 \
-  --itr 1
+  --itr 1 >logs/$model_name'_'electricity_96_720.log 

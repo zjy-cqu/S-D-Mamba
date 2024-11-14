@@ -1,0 +1,68 @@
+Args in experiment:
+Namespace(is_training=1, model_id='ETTh1_96_192', model='iMamba_1', data='ETTh1', root_path='./dataset/ETT-small/', data_path='ETTh1.csv', features='M', target='OT', freq='h', checkpoints='./checkpoints/', seq_len=96, label_len=48, pred_len=192, enc_in=7, dec_in=7, c_out=7, d_model=256, n_heads=8, e_layers=2, d_layers=1, d_ff=256, moving_avg=25, factor=1, distil=True, dropout=0.1, embed='timeF', activation='gelu', output_attention=False, do_predict=False, num_workers=10, itr=1, train_epochs=10, batch_size=32, patience=3, learning_rate=7e-05, des='Exp', loss='MSE', lradj='type1', use_amp=False, use_gpu=True, gpu=0, use_multi_gpu=False, devices='0,1,2,3', exp_name='MTSF', channel_independence=False, inverse=False, class_strategy='projection', target_root_path='./data/electricity/', target_data_path='electricity.csv', efficient_training=False, use_norm=True, partial_start_index=0, d_state=2)
+Use GPU: cuda:0
+>>>>>>>start training : ETTh1_96_192_iMamba_1_ETTh1_M_ft96_sl48_ll192_pl256_dm8_nh2_el1_dl256_df1_fctimeF_ebTrue_dtExp_projection_0>>>>>>>>>>>>>>>>>>>>>>>>>>
+train 8353
+val 2689
+test 2689
+	iters: 100, epoch: 1 | loss: 0.6129148
+	speed: 0.0214s/iter; left time: 53.6316s
+	iters: 200, epoch: 1 | loss: 0.4942819
+	speed: 0.0147s/iter; left time: 35.4592s
+Epoch: 1 cost time: 4.603654384613037
+Epoch: 1, Steps: 261 | Train Loss: 0.5009913 Vali Loss: 1.0144933 Test Loss: 0.4564580
+Validation loss decreased (inf --> 1.014493).  Saving model ...
+Updating learning rate to 7e-05
+	iters: 100, epoch: 2 | loss: 0.4166054
+	speed: 0.1537s/iter; left time: 345.8551s
+	iters: 200, epoch: 2 | loss: 0.4070773
+	speed: 0.0149s/iter; left time: 32.0059s
+Epoch: 2 cost time: 4.089013338088989
+Epoch: 2, Steps: 261 | Train Loss: 0.4344791 Vali Loss: 0.9930890 Test Loss: 0.4465303
+Validation loss decreased (1.014493 --> 0.993089).  Saving model ...
+Updating learning rate to 3.5e-05
+	iters: 100, epoch: 3 | loss: 0.4597806
+	speed: 0.1493s/iter; left time: 296.8807s
+	iters: 200, epoch: 3 | loss: 0.4582572
+	speed: 0.0149s/iter; left time: 28.0976s
+Epoch: 3 cost time: 3.9885659217834473
+Epoch: 3, Steps: 261 | Train Loss: 0.4158720 Vali Loss: 0.9952888 Test Loss: 0.4431714
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 1.75e-05
+	iters: 100, epoch: 4 | loss: 0.4257931
+	speed: 0.1487s/iter; left time: 256.8983s
+	iters: 200, epoch: 4 | loss: 0.4062406
+	speed: 0.0124s/iter; left time: 20.1859s
+Epoch: 4 cost time: 3.475950241088867
+Epoch: 4, Steps: 261 | Train Loss: 0.4080166 Vali Loss: 0.9871358 Test Loss: 0.4430655
+Validation loss decreased (0.993089 --> 0.987136).  Saving model ...
+Updating learning rate to 8.75e-06
+	iters: 100, epoch: 5 | loss: 0.4635748
+	speed: 0.1745s/iter; left time: 256.0290s
+	iters: 200, epoch: 5 | loss: 0.3504822
+	speed: 0.0176s/iter; left time: 24.0480s
+Epoch: 5 cost time: 4.5290610790252686
+Epoch: 5, Steps: 261 | Train Loss: 0.4038676 Vali Loss: 0.9876620 Test Loss: 0.4427811
+EarlyStopping counter: 1 out of 3
+Updating learning rate to 4.375e-06
+	iters: 100, epoch: 6 | loss: 0.4137461
+	speed: 0.1529s/iter; left time: 184.3701s
+	iters: 200, epoch: 6 | loss: 0.3751794
+	speed: 0.0138s/iter; left time: 15.2248s
+Epoch: 6 cost time: 3.7095437049865723
+Epoch: 6, Steps: 261 | Train Loss: 0.4023889 Vali Loss: 0.9884006 Test Loss: 0.4432537
+EarlyStopping counter: 2 out of 3
+Updating learning rate to 2.1875e-06
+	iters: 100, epoch: 7 | loss: 0.4357745
+	speed: 0.1539s/iter; left time: 145.4691s
+	iters: 200, epoch: 7 | loss: 0.4254636
+	speed: 0.0133s/iter; left time: 11.2390s
+Epoch: 7 cost time: 3.677320718765259
+Epoch: 7, Steps: 261 | Train Loss: 0.4010197 Vali Loss: 0.9881082 Test Loss: 0.4427251
+EarlyStopping counter: 3 out of 3
+Early stopping
+>>>>>>>testing : ETTh1_96_192_iMamba_1_ETTh1_M_ft96_sl48_ll192_pl256_dm8_nh2_el1_dl256_df1_fctimeF_ebTrue_dtExp_projection_0<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+test 2689
+test shape: (2689, 1, 192, 7) (2689, 1, 192, 7)
+test shape: (2689, 192, 7) (2689, 192, 7)
+mse:0.4430652856826782, mae:0.43866533041000366

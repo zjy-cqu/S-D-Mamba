@@ -1,4 +1,8 @@
-export CUDA_VISIBLE_DEVICES=0
+export CUDA_VISIBLE_DEVICES=2
+
+if [ ! -d "./logs" ]; then
+    mkdir ./logs
+fi
 
 model_name=S_Mamba
 # d state 2
@@ -21,7 +25,7 @@ python -u run.py \
   --d_ff 256 \
   --d_state 2 \
   --learning_rate 0.00005 \
-  --itr 1
+  --itr 1   >logs/$model_name'_not_inverted_'ETTm2_96_96.log 
 
 python -u run.py \
   --is_training 1 \
@@ -42,7 +46,7 @@ python -u run.py \
   --d_state 2 \
   --learning_rate 0.00005 \
   --d_ff 128 \
-  --itr 1
+  --itr 1  >logs/$model_name'_not_inverted_'ETTm2_96_192.log 
 
 python -u run.py \
   --is_training 1 \
@@ -63,7 +67,7 @@ python -u run.py \
   --d_state 2 \
   --learning_rate 0.00003 \
   --d_ff 128 \
-  --itr 1
+  --itr 1  >logs/$model_name'_not_inverted_'ETTm2_96_336.log 
 
 python -u run.py \
   --is_training 1 \
@@ -84,4 +88,4 @@ python -u run.py \
   --d_state 2 \
   --learning_rate 0.00005 \
   --d_ff 128 \
-  --itr 1
+  --itr 1  >logs/$model_name'_not_inverted_'ETTm2_96_720.log  

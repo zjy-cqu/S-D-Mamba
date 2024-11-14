@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 from layers.Mamba_EncDec import Encoder, EncoderLayer
-from layers.Embed import DataEmbedding_inverted
+from layers.Embed import DataEmbedding_inverted, DataEmbedding
 
 from mamba_ssm import Mamba
 class Model(nn.Module):
