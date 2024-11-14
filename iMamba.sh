@@ -10,11 +10,11 @@ echo "iMamba ettm1"
 echo "iMamba ettm2"
 ./scripts/multivariate_forecasting/ETT/iMamba_ETTm2.sh
 
-# echo "iMamba traffic start"
-# ./scripts/multivariate_forecasting/Traffic/iMamba.sh
+echo "iMamba traffic start"
+./scripts/multivariate_forecasting/Traffic/iMamba.sh
 
-# echo "iMamba weather start"
-# ./scripts/multivariate_forecasting/Weather/iMamba.sh
+echo "iMamba weather start"
+./scripts/multivariate_forecasting/Weather/iMamba.sh
 
 
 # echo "iMamba electricity start"
