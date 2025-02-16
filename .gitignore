@@ -1,0 +1,8 @@
+*.pth
+*.pyc
+/dataset/
+/logs/
+*.log
+/test_results/
+/checkpoints/
+/results/

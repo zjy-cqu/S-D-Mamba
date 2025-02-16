@@ -34,11 +34,13 @@ class EncoderLayer(nn.Module):
                         FullAttention(False, 2, attention_dropout=0.1,
                                       output_attention=True), 11,1)
     def forward(self, x, attn_mask=None, tau=None, delta=None):
+        # print("x.shape", x.shape)       # [B, N, D]
         new_x = self.attention(x) + self.attention_r(x.flip(dims=[1])).flip(dims=[1])
         attn = 1
 
         x = x + new_x
         y = x = self.norm1(x)
+        # print("y.shape", y.shape)       # [B, N, D]
         y = self.dropout(self.activation(self.conv1(y.transpose(-1, 1))))
         y = self.dropout(self.conv2(y).transpose(-1, 1))
 

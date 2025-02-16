@@ -22,10 +22,9 @@ python -u run.py \
   --c_out 7 \
   --des 'Exp' \
   --d_model 256 \
-  --d_state 2\
   --d_ff 256 \
   --itr 1 \
-  --learning_rate 0.00007 >logs/$model_name'_norm_'ETTh1_96_96.log
+  --learning_rate 0.00007 >logs/$model_name'_mamba2_'ETTh1_96_96.log
 
 python -u run.py \
   --is_training 1 \
@@ -43,10 +42,9 @@ python -u run.py \
   --c_out 7 \
   --des 'Exp' \
   --d_model 256 \
-  --d_state 2 \
   --d_ff 256 \
   --itr 1 \
-  --learning_rate 0.00007  >logs/$model_name'_norm_'ETTh1_96_192.log 
+  --learning_rate 0.00007  >logs/$model_name'_mamba2_'ETTh1_96_192.log 
 
 python -u run.py \
   --is_training 1 \
@@ -64,10 +62,9 @@ python -u run.py \
   --c_out 7 \
   --des 'Exp' \
   --d_model 256 \
-  --d_state 2 \
   --d_ff 256 \
   --itr 1 \
-  --learning_rate 0.00005 >logs/$model_name'_norm_'ETTh1_96_336.log 
+  --learning_rate 0.00005 >logs/$model_name'_mamba2_'ETTh1_96_336.log 
 
 python -u run.py \
   --is_training 1 \
@@ -85,7 +82,6 @@ python -u run.py \
   --c_out 7 \
   --des 'Exp' \
   --d_model 256 \
-  --d_state 2 \
   --d_ff 256 \
   --itr 1 \
-  --learning_rate 0.00005 >logs/$model_name'_norm_'ETTh1_96_720.log  
+  --learning_rate 0.00005 >logs/$model_name'_mamba2_'ETTh1_96_720.log  

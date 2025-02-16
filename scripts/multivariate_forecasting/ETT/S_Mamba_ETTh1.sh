@@ -3,7 +3,9 @@ export CUDA_VISIBLE_DEVICES=1
 if [ ! -d "./logs" ]; then
     mkdir ./logs
 fi
-
+if [ ! -d "./logs/check" ]; then
+    mkdir ./logs/check
+fi
 
 model_name=S_Mamba
 # d state 2
@@ -26,7 +28,7 @@ python -u run.py \
   --d_state 2\
   --d_ff 256 \
   --itr 1 \
-  --learning_rate 0.00003 >logs/$model_name'_learn3_'ETTh1_96_96.log
+  --learning_rate 0.00003 >logs/check/$model_name'_'ETTh1_96_96.log
 
 # python -u run.py \
 #   --is_training 1 \

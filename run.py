@@ -86,7 +86,28 @@ if __name__ == '__main__':
     parser.add_argument('--use_norm', type=int, default=True, help='use norm and denorm')
     parser.add_argument('--partial_start_index', type=int, default=0, help='the start index of variates for partial training, '
                                                                            'you can select [partial_start_index, min(enc_in + partial_start_index, N)]')
-    parser.add_argument('--d_state', type=int, default=32, help='parameter of Mamba Block')
+    # parser.add_argument('--d_state', type=int, default=32, help='parameter of Mamba Block')
+
+    # CMamba iMamba
+    parser.add_argument('--dt_rank', type=int, default=32)
+    parser.add_argument('--patch_num', type=int, default=32)
+    parser.add_argument('--d_state', type=int, default=16)
+    parser.add_argument('--d_conv', type=int, default=4)
+    parser.add_argument('--expand', type=int, default=2)
+    parser.add_argument('--dt_min', type=float, default=0.001)
+    parser.add_argument('--dt_init', type=str, default='random', help='random or constant')
+    parser.add_argument('--dt_max', type=float, default=0.1)
+    parser.add_argument('--dt_scale', type=float, default=1.0)
+    parser.add_argument('--dt_init_floor', type=float, default=1e-4)
+    parser.add_argument('--bias', type=bool, default=True)
+    parser.add_argument('--conv_bias', type=bool, default=True)
+    parser.add_argument('--pscan', action='store_true', help='use parallel scan mode or sequential mode when training', default=False)
+    parser.add_argument('--avg', action='store_true', help='avg pooling', default=False)
+    parser.add_argument('--max', action='store_true', help='max pooling', default=False)
+    parser.add_argument('--reduction', type=int, default=2)
+    parser.add_argument('--gddmlp', action='store_true', help='global data-dependent mlp', default=False)
+    parser.add_argument('--channel_mixup', action='store_true', help='channel mixup', default=False)
+    parser.add_argument('--sigma', type=float, default=1.0)
 
     args = parser.parse_args()
     args.use_gpu = True if torch.cuda.is_available() and args.use_gpu else False
