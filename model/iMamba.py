@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from layers.iMamba_EncDec_2 import Encoder, EncoderLayer
+from layers.iMamba_EncDec import Encoder, EncoderLayer
 from layers.Embed import DataEmbedding_inverted
 from layers.SelfAttention_Family import FullAttention, AttentionLayer
 from mamba_ssm import Mamba

@@ -26,17 +26,12 @@ class EncoderLayer(nn.Module):
             attn_mask=attn_mask,
             tau=tau, delta=delta
         )
-        # x = x + self.dropout(new_x)
         attn_out = self.norm1(x)
-        # attn_out = self.attention(x, attn_mask=attn_mask)
-        # print("=============", x.shape)
         # 使用Mamba模块学习时间依赖关系
         time_out = self.norm2(self.mamba(x))
 
         # 将自注意力和Mamba输出结合
-        # x = x + attn_out + time_out
         x = x + attn_out + time_out
-        # y = x = self.norm2(x)
 
         # 不用FNN
         # y = self.dropout(self.activation(x.transpose(-1, 1)))

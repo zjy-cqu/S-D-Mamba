@@ -5,7 +5,7 @@ if [ ! -d "./logs" ]; then
     mkdir ./logs
 fi
 
-model_name=iMamba_2
+model_name=iMamba
 # d state 2
 # python -u run.py \
 #   --is_training 1 \
