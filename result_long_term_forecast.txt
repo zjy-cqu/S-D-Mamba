@@ -361,3 +361,15 @@ mse:0.37947165966033936, mae:0.25916799902915955
 traffic_96_336_S_Mamba_custom_M_ft96_sl48_ll336_pl512_dm8_nh4_el1_dl512_df1_fctimeF_ebTrue_dtExp_projection_0  
 mse:0.41543859243392944, mae:0.27681681513786316
 
+Exchange_96_96_iMamba_custom_M_ft96_sl48_ll96_pl128_dm8_nh2_el1_dl128_df1_fctimeF_ebTrue_dtExp_projection_0  
+mse:0.08826915919780731, mae:0.209135040640831
+
+Exchange_96_192_iMamba_custom_M_ft96_sl48_ll192_pl128_dm8_nh2_el1_dl128_df1_fctimeF_ebTrue_dtExp_projection_0  
+mse:0.19258444011211395, mae:0.3137223422527313
+
+Exchange_96_336_iMamba_custom_M_ft96_sl48_ll336_pl128_dm8_nh2_el1_dl128_df1_fctimeF_ebTrue_dtExp_projection_0  
+mse:0.3361556828022003, mae:0.4205785393714905
+
+Exchange_96_720_iMamba_custom_M_ft96_sl48_ll720_pl128_dm8_nh2_el1_dl128_df1_fctimeF_ebTrue_dtExp_projection_0  
+mse:0.8667510151863098, mae:0.7053595185279846
+
