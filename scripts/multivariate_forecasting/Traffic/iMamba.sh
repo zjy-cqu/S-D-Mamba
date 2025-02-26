@@ -25,7 +25,7 @@ python -u run.py \
   --d_ff 512 \
   --batch_size 16 \
   --learning_rate 0.001 \
-  --itr 1  >logs/$model_name'_'Traffic_96_96.log 
+  --itr 1  >logs/$model_name'_ParseAttn_'Traffic_96_96.log 
 
 python -u run.py \
   --is_training 1 \
@@ -46,7 +46,7 @@ python -u run.py \
   --d_ff 512 \
   --batch_size 16 \
   --learning_rate 0.001 \
-  --itr 1  >logs/$model_name'_'Traffic_96_192.log 
+  --itr 1  >logs/$model_name'_ParseAttn_'Traffic_96_192.log 
 
 python -u run.py \
   --is_training 1 \
@@ -67,7 +67,7 @@ python -u run.py \
   --d_ff 512 \
   --batch_size 16 \
   --learning_rate 0.002 \
-  --itr 1   >logs/$model_name'_'Traffic_96_336.log 
+  --itr 1   >logs/$model_name'_ParseAttn_'Traffic_96_336.log 
 
 python -u run.py \
   --is_training 1 \
@@ -89,4 +89,4 @@ python -u run.py \
   --d_ff 512 \
   --batch_size 16 \
   --learning_rate 0.0008\
-  --itr 1   >logs/$model_name'_'Traffic_96_720.log  
+  --itr 1   >logs/$model_name'_ParseAttn_'Traffic_96_720.log  

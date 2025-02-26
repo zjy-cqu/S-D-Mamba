@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from layers.iMamba_EncDec import Encoder, EncoderLayer
 from layers.Embed import DataEmbedding_inverted
-from layers.SelfAttention_Family import FullAttention, AttentionLayer
+from layers.SelfAttention_Family import FullAttention, AttentionLayer, ProbAttention
 from mamba_ssm import Mamba
 
 class Model(nn.Module):
@@ -23,7 +23,7 @@ class Model(nn.Module):
             [
                 EncoderLayer(
                     AttentionLayer(
-                        FullAttention(False, attention_dropout=0.1,
+                        ProbAttention(False, configs.factor, attention_dropout=configs.dropout,
                         output_attention=self.output_attention),
                         d_model=configs.d_model,
                         n_heads=configs.n_heads

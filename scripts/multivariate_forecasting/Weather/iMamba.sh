@@ -26,7 +26,7 @@ python -u run.py \
   --train_epochs 5\
   --d_state 2 \
   --d_ff 512\
-  --itr 1  >logs/$model_name'_'Weather_96_96.log 
+  --itr 1  >logs/$model_name'_ParseAttn_'Weather_96_96.log 
 
 
 python -u run.py \
@@ -49,7 +49,7 @@ python -u run.py \
   --d_model 512\
   --d_state 2 \
   --d_ff 512\
-  --itr 1  >logs/$model_name'_'Weather_96_192.log 
+  --itr 1  >logs/$model_name'_ParseAttn_'Weather_96_192.log 
 
 
 python -u run.py \
@@ -72,7 +72,7 @@ python -u run.py \
   --d_model 512\
   --d_state 2 \
   --d_ff 512\
-  --itr 1   >logs/$model_name'_'Weather_96_336.log 
+  --itr 1   >logs/$model_name'_ParseAttn_'Weather_96_336.log 
 
 
 python -u run.py \
@@ -95,4 +95,4 @@ python -u run.py \
   --d_model 512\
   --d_state 2 \
   --d_ff 512\
-  --itr 1   >logs/$model_name'_'Weather_96_720.log  
+  --itr 1   >logs/$model_name'_ParseAttn_'Weather_96_720.log  
