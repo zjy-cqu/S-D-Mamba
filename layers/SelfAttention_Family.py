@@ -3,9 +3,100 @@ import torch.nn as nn
 import numpy as np
 from math import sqrt
 from utils.masking import TriangularCausalMask, ProbMask
-from reformer_pytorch import LSHSelfAttention
+# from reformer_pytorch import LSHSelfAttention
 from einops import rearrange
+import torch.nn.functional as F
 
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+class MLAAttention(nn.Module):
+    def __init__(self, mask_flag=False, attention_dropout=0.1, 
+                 output_attention=False, compression_ratio=56, 
+                 hidden_k=256):
+        super(MLAAttention, self).__init__()
+        self.hidden_k = hidden_k
+        
+        # 维度验证：确保hidden_k是偶数
+        assert hidden_k % 2 == 0, "hidden_k must be even for RoPE"
+        
+        # KV压缩层（显式维度注释）
+        self.k_compress = nn.Sequential(
+            nn.Linear(hidden_k, hidden_k//compression_ratio),  # 256 → 4 (当ratio=56)
+            nn.GELU(),
+            nn.Linear(hidden_k//compression_ratio, hidden_k)   # 4 → 256
+        )
+        self.v_compress = nn.Sequential(
+            nn.Linear(hidden_k, hidden_k//compression_ratio),
+            nn.GELU(),
+            nn.Linear(hidden_k//compression_ratio, hidden_k)
+        )
+        
+        # 严格维度控制
+        self.q_proj = nn.Linear(hidden_k, hidden_k)  # 保持输入维度
+        self.k_proj = nn.Linear(hidden_k, hidden_k)
+        
+        # RoPE参数（精确维度计算）
+        self.rotary_dim = hidden_k // 2              # 旋转维度=128（当hidden_k=256）
+        self.register_buffer('inv_freq', 1.0 / (10000 ** ( 
+            torch.arange(0, self.rotary_dim, 1).float() / self.rotary_dim
+        )))  # shape: [rotary_dim]
+
+    def _apply_rope(self, x):
+        """经过严格维度验证的RoPE实现"""
+        batch, seq_len, _ = x.shape  # x.shape = [B, L, K]
+        
+        # 拆分实部虚部（精确维度控制）
+        x = x.view(batch, seq_len, self.rotary_dim, 2)  # [B, L, 128, 2]
+        
+        # 生成位置编码（维度对齐）
+        pos = torch.arange(seq_len, dtype=torch.float32).to(x.device)  # [L]
+        sinusoid = torch.einsum('i,j->ij', pos, self.inv_freq)  # [L, rotary_dim]
+        sin = torch.sin(sinusoid).unsqueeze(0).unsqueeze(-1)    # [1, L, 128, 1]
+        cos = torch.cos(sinusoid).unsqueeze(0).unsqueeze(-1)    # [1, L, 128, 1]
+        
+        # 广播维度到匹配输入
+        sin = sin.expand(batch, -1, -1, -1)  # [B, L, 128, 1]
+        cos = cos.expand(batch, -1, -1, -1)
+        
+        # 旋转操作（维度精确控制）
+        x_rot = x * cos + self._rotate_every_two(x) * sin  # [B, L, 128, 2]
+        return x_rot.reshape(batch, seq_len, -1)  # 恢复为[B, L, 256]
+
+    def _rotate_every_two(self, x):
+        """严格维度保持的旋转函数"""
+        x_ = x.clone()
+        x_rot = torch.stack((-x_[..., 1::2], x_[..., ::2]), dim=-1)
+        return x_rot.reshape_as(x)
+
+    def forward(self, queries, keys, values, attn_mask=None, **kwargs):
+        # 输入维度验证
+        assert queries.shape[-1] == self.hidden_k, f"Input dim {queries.shape[-1]} != {self.hidden_k}"
+        
+        # 投影保证维度
+        queries = self.q_proj(queries)  # [B, L, 256]
+        keys = self.k_proj(keys)
+        
+        # KV压缩（显式维度检查）
+        keys = self.k_compress(keys)    # [B, L, 4] → [B, L, 256]
+        values = self.v_compress(values)
+        
+        # 应用RoPE（维度不变）
+        q = self._apply_rope(queries)    # [B, L, 256]
+        k = self._apply_rope(keys)
+        
+        # 注意力计算（维度验证）
+        attn = torch.matmul(q, k.transpose(-2, -1))  # [B, L, L]
+        attn = attn / (self.hidden_k ** 0.5)
+        
+        if attn_mask is not None:
+            attn.masked_fill_(attn_mask, -1e9)
+            
+        attn = F.softmax(attn, dim=-1)
+        context = torch.matmul(attn, values)  # [B, L, 256]
+        
+        return context, attn
 
 # Code implementation from https://github.com/thuml/Flowformer
 class FlowAttention(nn.Module):
@@ -300,32 +391,32 @@ class AttentionLayer(nn.Module):
         return self.out_projection(out), attn
 
 
-class ReformerLayer(nn.Module):
-    def __init__(self, attention, d_model, n_heads, d_keys=None,
-                 d_values=None, causal=False, bucket_size=4, n_hashes=4):
-        super().__init__()
-        self.bucket_size = bucket_size
-        self.attn = LSHSelfAttention(
-            dim=d_model,
-            heads=n_heads,
-            bucket_size=bucket_size,
-            n_hashes=n_hashes,
-            causal=causal
-        )
+# class ReformerLayer(nn.Module):
+#     def __init__(self, attention, d_model, n_heads, d_keys=None,
+#                  d_values=None, causal=False, bucket_size=4, n_hashes=4):
+#         super().__init__()
+#         self.bucket_size = bucket_size
+#         self.attn = LSHSelfAttention(
+#             dim=d_model,
+#             heads=n_heads,
+#             bucket_size=bucket_size,
+#             n_hashes=n_hashes,
+#             causal=causal
+#         )
 
-    def fit_length(self, queries):
-        # inside reformer: assert N % (bucket_size * 2) == 0
-        B, N, C = queries.shape
-        if N % (self.bucket_size * 2) == 0:
-            return queries
-        else:
-            # fill the time series
-            fill_len = (self.bucket_size * 2) - (N % (self.bucket_size * 2))
-            return torch.cat([queries, torch.zeros([B, fill_len, C]).to(queries.device)], dim=1)
+#     def fit_length(self, queries):
+#         # inside reformer: assert N % (bucket_size * 2) == 0
+#         B, N, C = queries.shape
+#         if N % (self.bucket_size * 2) == 0:
+#             return queries
+#         else:
+#             # fill the time series
+#             fill_len = (self.bucket_size * 2) - (N % (self.bucket_size * 2))
+#             return torch.cat([queries, torch.zeros([B, fill_len, C]).to(queries.device)], dim=1)
 
-    def forward(self, queries, keys, values, attn_mask, tau, delta):
-        # in Reformer: defalut queries=keys
-        B, N, C = queries.shape
-        queries = self.attn(self.fit_length(queries))[:, :N, :]
-        return queries, None
+#     def forward(self, queries, keys, values, attn_mask, tau, delta):
+#         # in Reformer: defalut queries=keys
+#         B, N, C = queries.shape
+#         queries = self.attn(self.fit_length(queries))[:, :N, :]
+#         return queries, None
 

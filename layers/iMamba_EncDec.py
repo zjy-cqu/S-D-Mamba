@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 from mamba_ssm import Mamba
-from layers.SelfAttention_Family import FullAttention, AttentionLayer
+from layers.SelfAttention_Family import FullAttention, AttentionLayer, MLAAttention
 
 class EncoderLayer(nn.Module):
     def __init__(self, attention, mamba, d_model, d_ff=None, dropout=0.1, activation="relu"):

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from layers.iMamba_EncDec import Encoder, EncoderLayer
 from layers.Embed import DataEmbedding_inverted
-from layers.SelfAttention_Family import FullAttention, AttentionLayer
+from layers.SelfAttention_Family import FullAttention, AttentionLayer, MLAAttention
 from mamba_ssm import Mamba
 
 class Model(nn.Module):
@@ -22,12 +22,13 @@ class Model(nn.Module):
         self.encoder = Encoder(
             [
                 EncoderLayer(
-                    AttentionLayer(
-                        FullAttention(False, attention_dropout=0.1,
-                        output_attention=self.output_attention),
-                        d_model=configs.d_model,
-                        n_heads=configs.n_heads
-                    ),
+                    MLAAttention(  # <--- 替换FullAttention为MLAAttention
+                            mask_flag=False,
+                            attention_dropout=0.1,
+                            output_attention=configs.output_attention,
+                            compression_ratio=56,  # 关键压缩参数
+                            hidden_k=256           # 潜在空间维度
+                        ),
                     Mamba(
                         d_model=configs.d_model,  # Model dimension d_model
                         d_state=configs.d_state,  # SSM state expansion factor
