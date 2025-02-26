@@ -1,4 +1,4 @@
-export CUDA_VISIBLE_DEVICES=0
+export CUDA_VISIBLE_DEVICES=1
 
 if [ ! -d "./logs" ]; then
     mkdir ./logs
@@ -26,7 +26,7 @@ python -u run.py \
   --train_epochs 5 \
   --batch_size 16 \
   --learning_rate 0.001 \
-  --itr 1 >logs/$model_name'_'electricity_96_96.log 
+  --itr 1 >logs/$model_name'_seriesdecomp_'electricity_96_96.log 
 
 python -u run.py \
   --is_training 1 \
@@ -48,7 +48,7 @@ python -u run.py \
   --batch_size 16 \
   --train_epochs 5 \
   --learning_rate 0.0005 \
-  --itr 1 >logs/$model_name'_'electricity_96_192.log 
+  --itr 1 >logs/$model_name'_seriesdecomp_'electricity_96_192.log 
 
   python -u run.py \
   --is_training 1 \
@@ -70,7 +70,7 @@ python -u run.py \
   --batch_size 16 \
   --train_epochs 5 \
   --learning_rate 0.0005 \
-  --itr 1 >logs/$model_name'_'electricity_96_336.log 
+  --itr 1 >logs/$model_name'_seriesdecomp_'electricity_96_336.log 
 
   python -u run.py \
   --is_training 1 \
@@ -92,4 +92,4 @@ python -u run.py \
   --train_epochs 5 \
   --batch_size 16 \
   --learning_rate 0.0005 \
-  --itr 1 >logs/$model_name'_'electricity_96_720.log 
+  --itr 1 >logs/$model_name'_seriesdecomp_'electricity_96_720.log 

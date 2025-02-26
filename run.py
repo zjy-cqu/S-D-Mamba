@@ -89,6 +89,8 @@ if __name__ == '__main__':
     # parser.add_argument('--d_state', type=int, default=32, help='parameter of Mamba Block')
 
     # CMamba iMamba
+    parser.add_argument('--decomposition', type=int, default=1, help='decomposition; True 1 False 0')
+    parser.add_argument('--kernel_size', type=int, default=25, help='decomposition-kernel')
     parser.add_argument('--dt_rank', type=int, default=32)
     parser.add_argument('--patch_num', type=int, default=32)
     parser.add_argument('--d_state', type=int, default=16)

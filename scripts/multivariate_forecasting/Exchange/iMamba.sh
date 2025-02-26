@@ -25,7 +25,7 @@ python -u run.py \
   --batch_size 16\
   --learning_rate 0.0001 \
   --d_ff 128 \
-  --itr 1  >logs/$model_name'_'Exchange_96_96.log 
+  --itr 1  >logs/$model_name'_seriesdecomp_'Exchange_96_96.log 
 
 python -u run.py \
   --is_training 1 \
@@ -45,7 +45,7 @@ python -u run.py \
   --d_model 128 \
   --learning_rate 0.0001 \
   --d_ff 128 \
-  --itr 1  >logs/$model_name'_'Exchange_96_192.log 
+  --itr 1  >logs/$model_name'_seriesdecomp_'Exchange_96_192.log 
 
 python -u run.py \
   --is_training 1 \
@@ -65,7 +65,7 @@ python -u run.py \
   --itr 1 \
   --d_model 128 \
   --learning_rate 0.00005 \
-  --d_ff 128   >logs/$model_name'_'Exchange_96_336.log 
+  --d_ff 128   >logs/$model_name'_seriesdecomp_'Exchange_96_336.log 
 
 python -u run.py \
   --is_training 1 \
@@ -85,4 +85,4 @@ python -u run.py \
   --learning_rate 0.00005 \
   --d_model 128 \
   --d_ff 128 \
-  --itr 1   >logs/$model_name'_'Exchange_96_720.log  
+  --itr 1   >logs/$model_name'_seriesdecomp_'Exchange_96_720.log  
